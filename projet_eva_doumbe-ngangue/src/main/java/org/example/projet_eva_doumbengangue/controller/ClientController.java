@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/clients")
+@RequestMapping("")
 public class ClientController {
     private ClientService clientService;
 
@@ -18,23 +18,23 @@ public class ClientController {
         return clientService.getAllClients();
     }
 
-    @PostMapping
+    @PostMapping("createClient")
     public Client createClient(@RequestBody Client client) {
         return clientService.createClient(client);
     }
-    @PutMapping("/{id}")
+    @PutMapping("updateClient/{id}")
     public Client updateClient(@PathVariable Long id, @RequestBody Client client ) {
         return clientService.updateClient(id, client);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("deleteClient/{id}")
     public void deleteClient(@PathVariable Long id) {
         clientService.deleteClient(id);
     }
 
     @GetMapping("/search")
     public List<Client> serachClientByNames(String prenom, String nom){
-        return clientService.serachClientByNames(prenom, nom);
+        return clientService.searchByPrenomAndNom(prenom, nom);
     }
 
 

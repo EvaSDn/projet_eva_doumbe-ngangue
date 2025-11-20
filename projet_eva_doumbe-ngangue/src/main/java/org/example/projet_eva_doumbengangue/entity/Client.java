@@ -18,7 +18,13 @@ public class Client {
 
     public Client() {
     }
-
+    public Client(String nom, String prenom, String adresse, String telephone, String ville) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.telephone = telephone;
+        this.ville = ville;
+    }
     public Long getId() {
         return id;
     }

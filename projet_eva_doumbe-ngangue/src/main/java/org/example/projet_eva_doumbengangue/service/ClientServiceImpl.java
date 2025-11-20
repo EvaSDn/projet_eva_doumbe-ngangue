@@ -2,9 +2,10 @@ package org.example.projet_eva_doumbengangue.service;
 
 import org.example.projet_eva_doumbengangue.entity.Client;
 import org.example.projet_eva_doumbengangue.respository.ClientRespository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class ClientServiceImpl implements ClientService {
 
     private ClientRespository clientRespository;
@@ -25,6 +26,9 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client updateClient(Long id ,Client client) {
+        if (client == null) {
+            return null;
+        }
         Client personne = getClientById(id);
 
         personne.setNom(client.getNom());
@@ -44,8 +48,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public List<Client> serachClientByNames(String prenom, String nom) {
-        return clientRespository.findByNames(prenom, nom);
+    public List<Client> searchByPrenomAndNom(String prenom, String nom) {
+        return clientRespository.findByPrenomAndNom(prenom, nom);
     }
 
 }
