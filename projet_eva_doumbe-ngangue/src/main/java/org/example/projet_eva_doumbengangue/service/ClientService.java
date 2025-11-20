@@ -10,5 +10,6 @@ public interface ClientService {
     public Client createClient(Client client);
     public Client updateClient(Long id,Client client);
     public void deleteClient(Long id);
+    public List<Client>  serachClientByNames(String prenom, String nom);
 
 }

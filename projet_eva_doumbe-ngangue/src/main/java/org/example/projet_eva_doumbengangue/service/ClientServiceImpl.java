@@ -25,22 +25,27 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client updateClient(Long id ,Client client) {
-        Client existing = getClientById(id);
+        Client personne = getClientById(id);
 
-        existing.setNom(client.getNom());
-        existing.setPrenom(client.getPrenom());
-        existing.setAdresse(client.getAdresse());
-        existing.setCodePostal(client.getCodePostal());
-        existing.setVille(client.getVille());
-        existing.setTelephone(client.getTelephone());
+        personne.setNom(client.getNom());
+        personne.setPrenom(client.getPrenom());
+        personne.setAdresse(client.getAdresse());
+        personne.setCodePostal(client.getCodePostal());
+        personne.setVille(client.getVille());
+        personne.setTelephone(client.getTelephone());
 
-        return clientRespository.save(existing);
+        return clientRespository.save(personne);
     }
 
     @Override
     public void deleteClient(Long id) {
         Client pop = getClientById(id);
         clientRespository.delete(pop);
+    }
+
+    @Override
+    public List<Client> serachClientByNames(String prenom, String nom) {
+        return clientRespository.findByNames(prenom, nom);
     }
 
 }
