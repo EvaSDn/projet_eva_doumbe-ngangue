@@ -2,6 +2,9 @@ package org.example.projet_eva_doumbengangue.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name= "clients")
 public class Client {
@@ -15,7 +18,8 @@ public class Client {
     private String telephone;
     private String codePostal;
     private String ville;
-
+    @OneToMany(mappedBy = "clients", cascade = CascadeType.ALL)
+    private List<Compte> comptes = new ArrayList<>();
     public Client() {
     }
     public Client(String nom, String prenom, String adresse, String telephone, String ville) {
