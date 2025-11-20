@@ -12,6 +12,10 @@ import java.util.List;
 @RequestMapping("")
 public class ClientController {
     private ClientService clientService;
+    @Autowired
+    public ClientController(ClientService clientService) {
+        this.clientService = clientService;
+    }
 
     @GetMapping
     public List<Client> getAllClients() {

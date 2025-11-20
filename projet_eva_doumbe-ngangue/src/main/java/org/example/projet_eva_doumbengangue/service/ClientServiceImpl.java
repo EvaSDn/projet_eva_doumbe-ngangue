@@ -5,11 +5,15 @@ import org.example.projet_eva_doumbengangue.respository.ClientRespository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class ClientServiceImpl implements ClientService {
 
     private ClientRespository clientRespository;
 
+    public ClientServiceImpl(ClientRespository clientRespository) {
+        this.clientRespository = clientRespository;
+    }
     public List<Client> getAllClients() {
         return clientRespository.findAll();
     }
