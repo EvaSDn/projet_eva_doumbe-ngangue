@@ -2,18 +2,26 @@ package org.example.projet_eva_doumbengangue.service;
 
 import org.example.projet_eva_doumbengangue.entity.Client;
 import org.example.projet_eva_doumbengangue.respository.ClientRespository;
+import org.example.projet_eva_doumbengangue.respository.CompteRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class ClientServiceImpl implements ClientService {
 
     private ClientRespository clientRespository;
+    //private CompteService compteService;
+private CompteRepository compteRepository;
+    public ClientServiceImpl(ClientRespository clientRespository,  CompteRepository compteRepository) {
 
-    public ClientServiceImpl(ClientRespository clientRespository) {
         this.clientRespository = clientRespository;
+       // this.compteService = compteService;
+        this.compteRepository = compteRepository;
     }
+     @Override
     public List<Client> getAllClients() {
         return clientRespository.findAll();
     }
@@ -37,7 +45,6 @@ public class ClientServiceImpl implements ClientService {
 
         personne.setNom(client.getNom());
         personne.setPrenom(client.getPrenom());
-        personne.setAdresse(client.getAdresse());
         personne.setCodePostal(client.getCodePostal());
         personne.setVille(client.getVille());
         personne.setTelephone(client.getTelephone());
@@ -48,6 +55,8 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public void deleteClient(Long id) {
         Client pop = getClientById(id);
+       // compteService.deleteComptesByClient(id);
+        compteRepository.deleteByClientId(id);
         clientRespository.delete(pop);
     }
 

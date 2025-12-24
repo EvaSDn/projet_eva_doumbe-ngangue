@@ -1,5 +1,6 @@
 package org.example.projet_eva_doumbengangue.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -14,18 +15,17 @@ public class Client {
 
     private String nom;
     private String prenom;
-    private String adresse;
     private String telephone;
     private String codePostal;
     private String ville;
-    @OneToMany(mappedBy = "clients", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "client")
+    @JsonIgnore
     private List<Compte> comptes = new ArrayList<>();
     public Client() {
     }
-    public Client(String nom, String prenom, String adresse, String telephone, String ville) {
+    public Client(String nom, String prenom, String telephone, String ville) {
         this.nom = nom;
         this.prenom = prenom;
-        this.adresse = adresse;
         this.telephone = telephone;
         this.ville = ville;
     }
@@ -52,13 +52,6 @@ public class Client {
         this.prenom = prenom;
     }
 
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
 
     public String getTelephone() {
         return telephone;
@@ -82,5 +75,13 @@ public class Client {
 
     public void setVille(String ville) {
         this.ville = ville;
+    }
+
+    public List<Compte> getComptes() {
+        return comptes;
+    }
+
+    public void setComptes(List<Compte> comptes) {
+        this.comptes = comptes;
     }
 }
